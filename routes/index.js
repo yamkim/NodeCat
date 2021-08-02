@@ -3,8 +3,8 @@ const axios = require('axios');
 
 const router = express.Router();
 
-const apiURL = 'http://localhost:8002/v1';
-// const apiURL = 'http://localhost:8002/v2';
+// const apiURL = 'http://localhost:8002/v1';
+const apiURL = 'http://localhost:8002/v2';
 axios.defaults.headers.origin = 'http://localhost:4000';
 
 const axiosNodeBirdApi = async (req, api) => {
