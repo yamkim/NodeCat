@@ -4,6 +4,7 @@ const axios = require('axios');
 const router = express.Router();
 
 const apiURL = 'http://localhost:8002/v1';
+// const apiURL = 'http://localhost:8002/v2';
 axios.defaults.headers.origin = 'http://localhost:4000';
 
 const axiosNodeBirdApi = async (req, api) => {
@@ -18,10 +19,10 @@ const axiosNodeBirdApi = async (req, api) => {
       headers: { authorization: req.session.jwt },
     });
   } catch (err) {
-    if (error.response.status === 419) {
+    if (err.response.status === 419) {
       delete req.session.jwt;
-      return request(req, api);
-    }
+      return axiosNodeBirdApi(req, api);
+    }       
     return err.response;
   }
 }
