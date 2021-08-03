@@ -49,6 +49,9 @@ const IndexRouteHandler = {
   }
 }
 
+router.get('/', (req, res) => {
+  res.render('main', { key: process.env.CLIENT_SECRET });
+});
 router.get('/mypost', IndexRouteHandler.returnAllPostsForUser);
 router.get('/search/:hashtag', IndexRouteHandler.returnAllPostsAboutHashtag);
 
