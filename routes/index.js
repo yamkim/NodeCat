@@ -4,7 +4,8 @@ const axios = require('axios');
 const router = express.Router();
 
 // const apiURL = 'http://localhost:8002/v1';
-const apiURL = 'http://localhost:8002/v2';
+// const apiURL = 'http://localhost:8002/v2';
+const apiURL = 'http://localhost:8002/v3';
 axios.defaults.headers.origin = 'http://localhost:4000';
 
 const axiosNodeBirdApi = async (req, api) => {
@@ -46,6 +47,11 @@ const IndexRouteHandler = {
   returnAllPostsAboutHashtag: async function(req, res, next) {
     req.apiUrl = `/posts/hashtag/${encodeURIComponent(req.params.hashtag)}`;
     returnJsonData(req, res, next);
+  },
+
+  returnAllFollowerFollowing: async function(req, res, next) {
+    req.apiUrl = `/follows/my`;
+    returnJsonData(req, res, next);
   }
 }
 
@@ -54,5 +60,6 @@ router.get('/', (req, res) => {
 });
 router.get('/mypost', IndexRouteHandler.returnAllPostsForUser);
 router.get('/search/:hashtag', IndexRouteHandler.returnAllPostsAboutHashtag);
+router.get('/myfollows', IndexRouteHandler.returnAllFollowerFollowing);
 
 module.exports = router;
